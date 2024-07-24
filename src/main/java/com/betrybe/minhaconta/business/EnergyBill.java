@@ -20,14 +20,23 @@ public class EnergyBill {
    * Req. 2 – Calculates an adjusted tariff for non-residential plans.
    */
   public double adjustedTariff(double value) {
-    return 0d;
+    if (!residentialPlan) {
+      return value * 1.10;
+    }
+    return value;
   }
 
   /**
    * Req. 3 – Calculates the total usage of a collection of devices.
    */
   public static int calculateTotalUsage(ElectronicDevice[] devices) {
-    return 0;
+    double totalUsage = 0;
+
+    for (ElectronicDevice device : devices) {
+      totalUsage += device.monthlyKwh();
+    }
+
+    return (int) totalUsage;
   }
 
   /**
