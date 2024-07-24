@@ -7,17 +7,26 @@ import com.ions.lightdealer.sdk.model.ElectronicDevice;
  * The type Energy bill.
  */
 public class EnergyBill {
-  // Req. 1 – Create class constructor and attributes.
   public Address address;
   public boolean residentialPlan;
   public double rate = 0.15;
 
-  public  EnergyBill(Address address, boolean residentialPlan) {
+  /**
+   * Construtor da classe EnergyBill.
+   *
+   * @param address o endereço da pessoa cliente
+   * @param residentialPlan se é um plano residencial ou não
+   */
+  public EnergyBill(Address address, boolean residentialPlan) {
     this.address = address;
     this.residentialPlan = residentialPlan;
   }
+
   /**
-   * Req. 2 – Calculates an adjusted tariff for non-residential plans.
+   * Calculates an adjusted tariff for non-residential plans.
+   *
+   * @param value o valor da conta de luz
+   * @return o valor ajustado da conta de luz
    */
   public double adjustedTariff(double value) {
     if (!residentialPlan) {
@@ -27,7 +36,10 @@ public class EnergyBill {
   }
 
   /**
-   * Req. 3 – Calculates the total usage of a collection of devices.
+   * Calculates the total usage of a collection of devices.
+   *
+   * @param devices uma coleção de dispositivos eletrônicos
+   * @return o consumo total mensal em quilowatt-hora, truncado para um valor inteiro
    */
   public static int calculateTotalUsage(ElectronicDevice[] devices) {
     double totalUsage = 0;
@@ -40,11 +52,10 @@ public class EnergyBill {
   }
 
   /**
-   * Aux. Method that estimates the energy bill value.
+   * Method that estimates the energy bill value.
    */
   public double estimate() {
     double value = calculateTotalUsage(address.getDevicesAsArray()) * rate;
-
     return adjustedTariff(value);
   }
 }
