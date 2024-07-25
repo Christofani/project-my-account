@@ -24,12 +24,49 @@ public class Application {
    * Req. 4 – Creates CLI menu.
    */
   public void run() {
+    String[] options = {
+      "1 - Cadastrar cliente",
+      "2 - Cadastrar imóvel de cliente",
+      "3 - Cadastrar dispositivos de imóvel",
+      "4 - Estimar conta de imóvel",
+      "5 - Otimizar uso de energia",
+      "6 - Sair"
+    };
+
+    char option;
+    do {
+      option = ui.inputMenuOption(options);
+      runOptionAction(option);
+    } while (option != '6');
   }
 
   /**
    * Req. 5 – Run menu options.
    */
   public void runOptionAction(char option) {
+    switch (option) {
+      case '1':
+        registerClient();
+        break;
+      case '2':
+        registerClientAddress();
+        break;
+      case '3':
+        registerAddressDevices();
+        break;
+      case '4':
+        estimateAddressBill();
+        break;
+      case '5':
+        optimizeEnergyBill();
+        break;
+      case '6':
+        ui.showMessage("Saindo...");
+        break;
+      default:
+        ui.showMessage("Opção inválida, por favor tente novamente.");
+        break;
+    }
   }
 
   /**
