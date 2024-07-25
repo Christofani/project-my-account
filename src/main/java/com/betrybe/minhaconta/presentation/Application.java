@@ -151,11 +151,38 @@ public class Application {
    * Req. 10 – Optimizes the energy bill.
    */
   public void optimizeEnergyBill() {
+    // Step 1: Collect CPF
+    String cpf = ui.inputClientCpf();
+
+    // Step 2: Find client by CPF
+    Client client = api.findClient(cpf);
+
+    // Step 3: Check if client exists
+    if (client == null) {
+      ui.showMessage("Pessoa cliente não encontrada!");
+      return;
+    }
+
+    // Step 4: Create an EnergyAccount object
+    EnergyAccount energyAccount = new EnergyAccount(client);
+
+    // Step 5: Call suggestReducedUsage with the EnergyAccount object
+    suggestReducedUsage(energyAccount);
   }
 
   /**
-   * Req 10 - Aux. Method to display high consumptions devices.
+   * Req. 10 - Aux. Method to display high consumption devices.
    */
   public void suggestReducedUsage(EnergyAccount energyAccount) {
+    // Step 1: Find high consumption devices
+    ElectronicDevice[] highConsumptionDevices = energyAccount.findHighConsumptionDevices();
+
+    // Step 2: Show message with device suggestions
+    ui.showMessage("Considere reduzir o uso dos seguintes dispositivos:");
+
+    // Step 3: Display each device's name
+    for (ElectronicDevice device : highConsumptionDevices) {
+      ui.showMessage(device.getName());
+    }
   }
 }
