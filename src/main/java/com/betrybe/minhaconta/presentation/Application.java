@@ -61,10 +61,10 @@ public class Application {
         optimizeEnergyBill();
         break;
       case '6':
-        ui.showMessage("Saindo...");
+        ui.showMessage("Volte sempre!");
         break;
       default:
-        ui.showMessage("Opção inválida, por favor tente novamente.");
+        ui.showMessage("Opção inválida!");
         break;
     }
   }
